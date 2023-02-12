@@ -2,7 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { nanoid } from "nanoid";
 import { useHistory } from "react-router";
-import Gratitude from "./../assets/grForm.png";
+import Gratitude from "./../assets/grForm2.png";
+import { useDispatch } from "react-redux";
+import { notEkleAPI } from "../actions";
+import { toast } from 'react-toastify';
+
 
 export default function PostForm() {
   const {
@@ -11,6 +15,7 @@ export default function PostForm() {
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
+  const dispatch = useDispatch();
   const history = useHistory();
 
   function onSubmit(data) {
@@ -22,10 +27,10 @@ export default function PostForm() {
         .join("|"),
     };
 
-    // burada ilgili eylemi dispatch edin
-    // toast mesajı gösterin
-    // sonra aşağıdaki satırı aktifleştirin
-    // setTimeout(() => history.push("/notlar"), 2000);
+    dispatch(notEkleAPI(yeniNot));
+    dispatch(notEkleAPI(yeniNot));
+    toast("Ben bu oyunu bozarım...");
+    setTimeout(() => history.push("/notlar"), 2000);
   }
 
   const inputCx = "border border-zinc-300 h-9 rounded-none text-sm px-2 w-full";
